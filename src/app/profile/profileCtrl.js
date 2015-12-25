@@ -7,6 +7,6 @@ controller('ProfileCtrl', function ($scope, ProfileModel) {
 
     $scope.profile = ProfileModel.getById(MyId);
 
-    $scope.posts = ProfileModel.getPosts(1);
+    $scope.posts = ProfileModel.getPostsByPage(MyId, 0, 5);
 
 });
