@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="social-net">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Social Network</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<% styles.forEach( function ( file ) { %>
+<link rel="stylesheet" type="text/css" href="<%= file %>"/><% }); %>
+</head>
+<body ng-cloak>
+
+<sn-header
+        sn-header-title="Social Network"
+        sn-header-home-state="profile">
+    <li ui-sref-active="active"><a ui-sref="profile">My Profile</a></li>
+    <li ui-sref-active="active"><a ui-sref="friends">Friends</a></li>
+    <li ui-sref-active="active"><a ui-sref="posts ">Posts</a></li>
+    <li ui-sref-active="active"><a ui-sref="home">Home</a></li>
+</sn-header>
+
+<h1>{{Myid}}</h1>
+
+<div ui-view class="container-fluid"></div>
+
+<sn-footer>
+
+</sn-footer>
+
+<% scripts.forEach( function ( file ) { %>
+<script type="text/javascript" src="<%= file %>"></script><% }); %>
+
+</body>
+</html>

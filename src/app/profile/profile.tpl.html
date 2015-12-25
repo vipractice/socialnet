@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-xs-12 col-md-3  sidebar">
+
+        <div class="media">
+            <div class="media-left">
+                <img class="media-object img-circle" src="{{profile.avatar}}" alt="{{profile.username}}">
+            </div>
+            <div class="media-body">
+                <h3>{{profile.name}}</h3>
+                <span>{{profile.age}} years. </span>
+            </div>
+        </div><hr>
+
+        <h4>General information</h4>
+        <ul><label>Birthday :</label> {{profile.birthday | date}}</ul>
+
+        <ul> <label>Location :</label>  {{profile.country}}, {{profile.city}}.</ul>
+        <ul> <label>Job :</label> {{profile.job}}.</ul>
+        <ul> <label>About self : </label> {{profile.description}}</ul><hr>
+        <h4> Conact information</h4>
+        <ul><label> E-mail : </label>{{profile.email}}</ul>
+        <ul><label>Phone : </label> {{profile.phone}}</ul><hr>
+    </div>
+    <div class="col-xs-12 col-md-9">
+        <h4>Posts of {{profile.name}}</h4><hr>
+
+        <posts></posts>
+
+    </div>
+</div>
