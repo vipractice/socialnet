@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('social-net.common.sn.profile', ['ngResource']).
+angular.module('social-net.common.models.profile', ['ngResource']).
 
 factory ('ProfileModel', ['$resource', function ($resource) {
 
