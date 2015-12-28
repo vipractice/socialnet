@@ -6,6 +6,8 @@ factory ('ProfileModel', ['$resource', function ($resource) {
 
     var profileUrl = 'http://localhost:3000/users/:id';
 
+    var start =0;
+
     var ProfileModel = $resource(profileUrl, { id: '@id'}, {
         getPosts: {
             method: 'GET',
@@ -14,8 +16,7 @@ factory ('ProfileModel', ['$resource', function ($resource) {
 
         getPostsByPage: {
             method: 'GET',
-            url: profileUrl + '/posts?_start=:start&_end=:end' ,
-            params:{ start:0,end:5},
+            url: profileUrl + '/posts' ,
             isArray: true
         }
     });
@@ -30,7 +31,7 @@ factory ('ProfileModel', ['$resource', function ($resource) {
         },
 
         getPostsByPage: function (id, start, end) {
-            return ProfileModel.getPostsByPage({ id: id, start:start,end:end})
+            return ProfileModel.getPostsByPage({ id: id})
         }
     };
 

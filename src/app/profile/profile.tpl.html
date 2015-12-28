@@ -21,10 +21,11 @@
         <ul><label> E-mail : </label>{{profile.email}}</ul>
         <ul><label>Phone : </label> {{profile.phone}}</ul><hr>
     </div>
-    <div class="col-xs-12 col-md-9">
+    <div class="col-xs-12 col-md-9 col-md-offset-3">
         <h4>Posts of {{profile.name}}</h4><hr>
 
-        <sn-post ng-repeat="post in posts" sn-post="post"></sn-post>
+        <sn-post ng-repeat="post in posts | orderBy: createdAt | limitTo: (limit) " sn-post="post"></sn-post>
+        <button class="btn right" ng-click="limit = limit+5"> More posts</button>
 
     </div>
 </div>

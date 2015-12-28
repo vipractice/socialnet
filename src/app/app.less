@@ -1,4 +1,23 @@
+@screen-md-min: 992px;
+
 body {
   padding: 70px 0;
 }
 
+.sidebar {
+  position: relative;
+  left: auto;
+  top: auto;
+
+}
+
+@media (min-width: @screen-md-min) {
+  .sidebar {
+    position: fixed;
+    padding-top: 20px;
+    left: 0px;
+    top: 50px;
+    bottom: 0px;
+    background-color: #f8f8f8;
+  }
+}
