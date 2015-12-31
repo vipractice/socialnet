@@ -25,7 +25,7 @@
         <h4>Posts of {{profile.name}}</h4><hr>
 
         <sn-post ng-repeat="post in posts | orderBy: createdAt | limitTo: (limit) " sn-post="post"></sn-post>
-        <button  class="btn btn-primary pull-right" ng-init="limit=6" ng-click="limit = limit+5" ng-hide="limit > posts.length">More posts</button>
+        <button  class="btn btn-primary pull-right" ng-init="limit=5" ng-click="limit = limit+5" ng-hide="limit > posts.length">More posts</button>
 
     </div>
 </div>
