@@ -11,7 +11,8 @@ factory ('ProfileRsr', ['$resource', function ($resource) {
             getUser: {
                 method: 'GET',
                 url: profileUrl,
-                isArray: true },
+                isArray: true
+            },
 
             updateUser: {
                 method: 'PUT'
@@ -20,12 +21,19 @@ factory ('ProfileRsr', ['$resource', function ($resource) {
             getPosts: {
                 method: 'GET',
                 url: profileUrl + '/posts?_sort=createdAt&_order=ASC',
-                isArray: true },
+                isArray: true
+            },
 
             getPostsByPage: {
                 method: 'GET',
                 url: profileUrl + '/posts?_sort=createdAt&_order=ASC?_start=:start&_end=:end' ,
                 params:{ start:0,end:5},
+                isArray: true
+            },
+
+            getAll: {
+                method: 'GET',
+                url: 'http://localhost:3000/users',
                 isArray: true
             }
         });
