@@ -3,12 +3,12 @@
 angular.module('social-net.common.models.friends', ['ngResource']).
 
 factory ('FriendsModel', ['$resource', function ($resource) {
-    var profileUrl = 'http://localhost:3000/users/:id';
+    var friendUrl = 'http://localhost:3000/friends?profileId=:id&_expand=user';
 
-    var FriendsModel = $resource(profileUrl , { id: '@id'}, {
+    var FriendsModel = $resource(friendUrl , { id: '@id'}, {
         getAll: {
             method: 'GET',
-            url: profileUrl + '/friends',
+            url: friendUrl,
             isArray: true
         }
     });

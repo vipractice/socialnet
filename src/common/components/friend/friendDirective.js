@@ -7,7 +7,7 @@ angular.module('social-net.common.components.friend')
         return {
             restrict: 'E',
             scope: {
-                post: '=snFriend'
+                friend: '=snFriend'
             },
             templateUrl: '../common/components/friend/friend.tpl.html',
             link: function linkFn (scope, element, attrs) {
