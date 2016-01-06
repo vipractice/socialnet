@@ -11,6 +11,11 @@ angular.module('social-net.common.services').
         this.login = function(user) {
             var deferred = $q.defer();
 
+            if (!user.username || !user.password) {
+                deferred.reject();
+                return deferred.promise;
+            }
+
             ProfileRsr.getAll({
                 username: user.username,
                 password: user.password

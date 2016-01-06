@@ -16,10 +16,14 @@ angular
     ])
 
     .config(['$urlRouterProvider', function($urlRouterProvider) {
-        $urlRouterProvider.otherwise('/profile');
+        $urlRouterProvider.otherwise('/login');
     }])
 
-    .run(function(editableOptions) {
+    .run(function($rootScope, editableOptions, AuthService) {
         editableOptions.theme = 'bs3';
+
+        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+            $rootScope.$broadcast('user-authorized', { isAuthorized: AuthService.isAuthorized });
+        });
     }
 );

@@ -28,7 +28,13 @@ factory ('ProfileModel',  function (ProfileRsr) {
 
         updateUser: function(profile) {
             return ProfileRsr.updateUser(profile).$promise;
-        }
+        },
+
+
+
+        start: 0,
+        end:2
+
     };
 
 });

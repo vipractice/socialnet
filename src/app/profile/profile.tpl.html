@@ -1,20 +1,18 @@
 <div class="row">
+
     <div class="col-xs-12 col-md-3  sidebar">
 
-        <form editable-form name="editableForm" onbeforesave="updateUser()">
+        <form editable-form name="editableProfileForm" onbeforesave="updateUser()">
 
-            <a href="#"  class="small pull-right" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+            <a href="#"  class="small pull-right" ng-click="editableProfileForm.$show()" ng-show="!editableProfileForm.$visible">
                 Edit profile
             </a>
 
+            <span class="pull-right" ng-show="editableProfileForm.$visible">
 
-
-            <span class="pull-right" ng-show="editableForm.$visible">
-
-                <button  type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+                <button  type="button" class="btn btn-default" ng-disabled="editableProfileForm.$waiting" ng-click="editableProfileForm.$cancel()">
                     Cancel
                 </button>
-
 
                 <button type="submit" class="btn btn-primary">
                     Save
@@ -32,25 +30,53 @@
                 </div>
             </div><hr>
 
-            <h4>General information</h4>
-                <ul editable-date="profile.birthday"><label>Birthday :</label> {{profile.birthday | date: "dd/MM/yyyy"}}</ul>
-                <ul editable-text="profile.country"> <label>Location :</label>  {{profile.country}}, {{profile.city}}.</ul>
-                <ul editable-text="profile.city"></ul>
-                <ul editable-text="profile.job"> <label>Job :</label> {{profile.job || 'empty'}}.</ul>
-                <ul editable-textarea="profile.description"> <label>About self : </label> {{profile.description}}</ul><hr>
+            <dl >
+                <h4>General information</h4>
+                <dt>Birthday :</dt>
+                <dd editable-date="profile.birthday">{{profile.birthday | date: "dd/MM/yyyy"}}</dd>
+                <dt>Location :</dt>
+                <dd editable-text="profile.country">   {{profile.country}}, {{profile.city}}.</dd>
+                <dd editable-text="profile.city"></dd>
+                <dt>Job :</dt>
+                <dd editable-text="profile.job">  {{profile.job || 'empty'}}.</dd>
+                <dt>About self : </dt>
+                <dd editable-textarea="profile.description">  {{profile.description}}</dd><hr>
 
-            <h4> Conact information</h4>
-                <ul editable-email="profile.email"><label> E-mail : </label>{{profile.email || 'empty'}}</ul>
-                <ul editable-tel="profile.phone" e-pattern="\(\d{3}\)\ \d{3}\-\d{4}" e-title="(xxx) xxx-xxxx"><label>Phone : </label> {{profile.phone || 'empty'}}</ul><hr>
+                <h4> Conact information</h4>
+                <dt> E-mail : </dt>
+                <dd editable-email="profile.email">{{profile.email || 'empty'}}</dd>
+                <dt>Phone : </dt>
+                <dd editable-tel="profile.phone" e-pattern="\(\d{3}\)\ \d{3}\-\d{4}" e-title="(xxx) xxx-xxxx"> {{profile.phone || 'empty'}}</dd><hr>
+            </dl>
 
         </form>
 
     </div>
-    <div class="col-xs-12 col-md-9 col-md-offset-3">
-        <h4>Posts of {{profile.name}}</h4><hr>
 
-        <sn-post ng-repeat="post in posts | orderBy: createdAt | limitTo: (limit) " sn-post="post"></sn-post>
-        <button  class="btn btn-primary pull-right" ng-init="limit=4" ng-click="limit = limit+5" ng-hide="limit > posts.length">More posts</button>
+    <div class="col-xs-12 col-md-9 col-md-offset-3">
+
+
+
+        <h4>Posts of {{profile.name}}</h4><hr>
+        <div class="row">
+            <form class="col-md-6">
+                <div class="form-group">
+                    <label for="postSubject">Post subject:</label>
+                    <input type="text" class="form-control" id="postSubject" placeholder="subject">
+                </div>
+                <div class="form-group">
+                    <label for="postDescription">Post text:</label>
+                    <textarea id="postDescription" type="text" rows="4" class="form-control" placeholder="text"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" ng-click="addPost()">Submit</button>
+            </form>
+        </div>
+        <hr>
+
+        <sn-post ng-repeat="post in posts | orderBy: createdAt  " sn-post="post" ng-init="end=0"></sn-post>
+        <button  class="btn btn-primary pull-right"  ng-click="limit()" ng-hide="!end">More posts</button>
 
     </div>
+
 </div>

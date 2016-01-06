@@ -2,7 +2,7 @@
 
 angular.module('social-net.common.components.header')
 
-.directive('snHeader', function () {
+.directive('snHeader', [function () {
 
     return {
         restrict: 'E',
@@ -14,7 +14,10 @@ angular.module('social-net.common.components.header')
         templateUrl: '../common/components/header/header.tpl.html',
         link: function linkFn (scope, element, attrs) {
 
+            scope.$on('user-authorized', function(event, data) {
+                scope.isAuthorized = data.isAuthorized;
+            });
         }
     };
 
-});
+}]);
