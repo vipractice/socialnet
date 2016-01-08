@@ -2,32 +2,67 @@
 
 angular.module('social-net.profile').
 
-controller('ProfileCtrl', function ($scope, ProfileModel) {
+controller('ProfileCtrl', [
+    '$scope', '$state', '$stateParams',
+    'ProfileModel', 'AuthService',
+    function (
+        $scope, $state, $stateParams,
+        ProfileModel, AuthService) {
 
-    var MyId = 1;
-    $scope.start = 0;
-    $scope.end = 5;
+    var step = 5;
 
+    var postLimits = {
+        start: 0,
+        end: step
+    };
 
-    $scope.profile = ProfileModel.getById(MyId);
+    if ($stateParams && $stateParams.id) {
+        ProfileModel.getById($stateParams.id).then(function(response) {
+            $scope.profile = response;
+            $scope.profile.birthday = new Date($scope.profile.birthday);
+            loadPosts();
+            $scope.showEditBtn = false;
+        });
+    } else {
+        $scope.profile = AuthService.user;
+        loadPosts();
+        $scope.showEditBtn = true;
+    }
 
-    $scope.posts = ProfileModel.getPostsByPage(MyId, $scope.start, $scope.end);
+    $scope.posts = [];
+
+    $scope.showMoreBtn = true;
 
     $scope.updateUser = function() {
         ProfileModel.updateUser($scope.profile).then(function(response) {
-            alert('Profile is updated');
+
         });
     };
 
-    $scope.limit = function() {
-        $scope.start = $scope.end;
-        $scope.end = $scope.end+5;
-        $scope.posts = ProfileModel.getPostsByPage(MyId, $scope.start, $scope.end);
-
-        if ($scope.posts.length > $scope.end ){
-            $scope.end = true;
-        }
-
+    $scope.loadPosts = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        updateLimit();
+        loadPosts();
     };
 
-});
+    function updateLimit() {
+        postLimits.start = postLimits.end;
+        postLimits.end = postLimits.end + step;
+    }
+
+    function loadPosts() {
+        ProfileModel.getPostsByPage($scope.profile.id, postLimits).then(function(response) {
+            if (response.length) {
+                $scope.posts = _.union($scope.posts, response);
+                if (response.length < step) {
+                    $scope.showMoreBtn = false;
+                }
+            } else {
+                $scope.showMoreBtn = false;
+            }
+
+        });
+    }
+
+}]);

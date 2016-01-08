@@ -39,7 +39,8 @@ module.exports = function(grunt) {
                     '<%=bowerDir%>/angular-ui-router/release/angular-ui-router.js',
                     '<%=bowerDir%>/angular-resource/angular-resource.js',
                     '<%=bowerDir%>/angular-xeditable/dist/js/xeditable.min.js',
-                    '<%=bowerDir%>/angular-bootstrap/ui-bootstrap-tpls.js'
+                    '<%=bowerDir%>/angular-bootstrap/ui-bootstrap-tpls.js',
+                    '<%=bowerDir%>/lodash/lodash.js'
                 ],
                 css: [
                     '<%=bowerDir%>/angular/angular-csp.css',

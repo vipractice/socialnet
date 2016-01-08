@@ -24,6 +24,8 @@ angular
 
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
             $rootScope.$broadcast('user-authorized', { isAuthorized: AuthService.isAuthorized });
+            // TODO: add check for authorization
+
         });
     }
 );

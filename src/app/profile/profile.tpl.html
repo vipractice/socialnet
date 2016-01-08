@@ -4,7 +4,7 @@
 
         <form editable-form name="editableProfileForm" onbeforesave="updateUser()">
 
-            <a href="#"  class="small pull-right" ng-click="editableProfileForm.$show()" ng-show="!editableProfileForm.$visible">
+            <a href="#"  class="small pull-right" ng-click="editableProfileForm.$show()" ng-show="!editableProfileForm.$visible" ng-hide="!showEditBtn">
                 Edit profile
             </a>
 
@@ -74,8 +74,8 @@
         </div>
         <hr>
 
-        <sn-post ng-repeat="post in posts | orderBy: createdAt  " sn-post="post" ng-init="end=0"></sn-post>
-        <button  class="btn btn-primary pull-right"  ng-click="limit()" ng-hide="!end">More posts</button>
+        <sn-post ng-repeat="post in posts track by $index | orderBy: createdAt" sn-post="post"></sn-post>
+        <a href="" class="btn btn-primary pull-right" ng-click="loadPosts($event)" ng-hide="!showMoreBtn">More posts</a>
 
     </div>
 

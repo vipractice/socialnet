@@ -10,31 +10,20 @@ factory ('ProfileModel',  function (ProfileRsr) {
         },
 
         getById: function (id) {
-             return ProfileRsr.get({ id: id },function(response){
-                response.birthday = new Date(response.birthday);
-                return response;
-
-             });
+            return ProfileRsr.get({ id: id }).$promise;
         },
 
         getPosts: function(id) {
             return ProfileRsr.getPosts({ id: id });
         },
 
-        getPostsByPage: function (id, start, end) {
-
-           return ProfileRsr.getPostsByPage({ id: id, start:start,end: end})
+        getPostsByPage: function (id, params) {
+           return ProfileRsr.getPostsByPage({ id: id, start: params.start, end: params.end }).$promise;
         },
 
         updateUser: function(profile) {
             return ProfileRsr.updateUser(profile).$promise;
-        },
-
-
-
-        start: 0,
-        end:2
-
+        }
     };
 
 });

@@ -9,5 +9,10 @@ config(function config($stateProvider) {
             url: '^/profile',
             controller: 'ProfileCtrl',
             templateUrl: 'profile/profile.tpl.html'
+        })
+        .state('userProfile', {
+            url: '/profile/:id',
+            controller: 'ProfileCtrl',
+            templateUrl: 'profile/profile.tpl.html'
         });
 });

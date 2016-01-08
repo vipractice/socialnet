@@ -26,7 +26,7 @@ factory ('ProfileRsr', ['$resource', function ($resource) {
 
             getPostsByPage: {
                 method: 'GET',
-                url: profileUrl + '/posts?_sort=createdAt&_order=ASC?_start=:start&_end=:end' ,
+                url: profileUrl + '/posts?_sort=createdAt&_order=ASC&_start=:start&_end=:end' ,
                 params:{ start:0,end:5},
                 isArray: true
             },
