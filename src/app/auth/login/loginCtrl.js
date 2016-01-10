@@ -27,7 +27,7 @@ angular.module('social-net.auth.login').
                 $timeout(function() {
                     $scope.message.isShown = false;
 
-                    if (AuthService.isAuthorized) {
+                    if (AuthService.user) {
                         $state.go('profile');
                     }
                 }, 1000);

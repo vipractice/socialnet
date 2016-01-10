@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('social-net.common.models.post', []);
+angular.module('social-net.common.models.post', ['ngResource']);
