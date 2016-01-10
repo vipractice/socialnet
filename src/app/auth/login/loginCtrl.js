@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('social-net.login').
+angular.module('social-net.auth.login').
 
     controller('LoginCtrl', ['$scope', '$state', '$timeout', 'AuthService',
         function ($scope, $state, $timeout, AuthService) {
@@ -30,7 +30,7 @@ angular.module('social-net.login').
                     if (AuthService.isAuthorized) {
                         $state.go('profile');
                     }
-                }, 3000);
+                }, 1000);
             }
 
         }]);

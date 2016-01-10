@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('social-net.login', ['ui.router']).
+angular.module('social-net.auth.login', ['ui.router']).
 
     config(function config($stateProvider) {
 
@@ -8,6 +8,6 @@ angular.module('social-net.login', ['ui.router']).
             .state('login', {
                 url: '^/login',
                 controller: 'LoginCtrl',
-                templateUrl: 'login/login.tpl.html'
+                templateUrl: 'auth/login/login.tpl.html'
             });
     });

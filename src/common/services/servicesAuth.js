@@ -33,4 +33,9 @@ angular.module('social-net.common.services').
             return deferred.promise;
         };
 
+        this.logout = function() {
+            this.user = undefined;
+            this.isAuthorized = false;
+        };
+
     }]);

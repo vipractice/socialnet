@@ -8,11 +8,9 @@ angular
         'templates-app',
         'xeditable',
         'social-net.common',
-        'social-net.home',
-        'social-net.posts',
         'social-net.friends',
         'social-net.profile',
-        'social-net.login'
+        'social-net.auth'
     ])
 
     .config(['$urlRouterProvider', function($urlRouterProvider) {
