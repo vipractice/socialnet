@@ -4,10 +4,10 @@ angular.module('social-net.profile').
 
 controller('ProfileCtrl', [
     '$scope', '$state', '$stateParams',
-    'ProfileModel', 'AuthService',
+    'ProfileModel', 'PostModel', 'AuthService',
     function (
         $scope, $state, $stateParams,
-        ProfileModel, AuthService) {
+        ProfileModel, PostModel, AuthService) {
 
     var step = 5;
 
@@ -19,14 +19,17 @@ controller('ProfileCtrl', [
     if ($stateParams && $stateParams.id) {
         ProfileModel.getById($stateParams.id).then(function(response) {
             $scope.profile = response;
-            $scope.profile.birthday = new Date($scope.profile.birthday);
-            loadPosts();
             $scope.showEditBtn = false;
+            loadPosts();
         });
     } else {
-        $scope.profile = AuthService.user;
-        loadPosts();
-        $scope.showEditBtn = true;
+        AuthService.checkAuth().then(function() {
+            $scope.profile = AuthService.user;
+            $scope.profile.birthday = new Date($scope.profile.birthday);
+            $scope.newPost = new PostModel(AuthService.user.id);
+            $scope.showEditBtn = true;
+            loadPosts();
+        });
     }
 
     $scope.posts = [];
@@ -34,16 +37,13 @@ controller('ProfileCtrl', [
     $scope.showMoreBtn = true;
 
     $scope.updateUser = function() {
-        ProfileModel.updateUser($scope.profile).then(function(response) {
-
-        });
+        ProfileModel.updateUser($scope.profile);
     };
 
-    $scope.createPost = function(post){
-        post.createdAt = new Date();
-        post.userId = AuthService.user.id;
-        ProfileModel.createPost(post).then(function(response){
-
+    $scope.createPost = function(){
+        $scope.newPost.save().then(function(post) {
+            $scope.posts.unshift(post);
+            $scope.newPost = new PostModel(AuthService.user.id);
         });
     };
 
@@ -72,6 +72,5 @@ controller('ProfileCtrl', [
 
         });
     }
-
 
 }]);

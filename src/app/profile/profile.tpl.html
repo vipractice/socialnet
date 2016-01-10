@@ -1,84 +1,108 @@
 <div class="row">
-
-    <div class="col-xs-12 col-md-3  sidebar">
-
+    <div class="col-xs-12 col-md-4 col-lg-3">
         <form editable-form name="editableProfileForm" onbeforesave="updateUser()">
-
-            <a href="#"  class="small pull-right" ng-click="editableProfileForm.$show()" ng-show="!editableProfileForm.$visible" ng-hide="!showEditBtn">
-                Edit profile
-            </a>
-
-            <span class="pull-right" ng-show="editableProfileForm.$visible">
-
-                <button  type="button" class="btn btn-default" ng-disabled="editableProfileForm.$waiting" ng-click="editableProfileForm.$cancel()">
-                    Cancel
-                </button>
-
-                <button type="submit" class="btn btn-primary">
-                    Save
-                </button>
-
-            </span>
-
             <div class="row">
-                <div class=" col-xs-6">
-                    <img class=" img-circle" src="{{profile.avatar}}" alt="{{profile.username}}">
+                <div class="col-xs-12 text-center">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <p><img class="img-circle" src="{{ profile.avatar }}" alt="{{ profile.name }}"></p>
+                            <p class="text-center" ng-show="editableProfileForm.$visible">
+                                <button type="submit" class="btn btn-sm btn-info">
+                                    Save <i class="fa fa-save"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm btn-default" ng-disabled="editableProfileForm.$waiting"
+                                        ng-click="editableProfileForm.$cancel()">
+                                    Cancel <i class="fa fa-times"></i>
+                                </button>
+                            </p>
+                            <h3 editable-text="profile.name">{{ profile.name || '' }}</h3>
+                            <p><em class="small text-muted" editable-textarea="profile.description">{{ profile.description }}</em></p>
+                            <p><span editable-number="profile.age">{{ profile.age }} years </span></p>
+                            <div class="text-center">
+                                <a href="#" class="btn btn-sm btn-success" ng-click="$event.preventDefault(); editableProfileForm.$show()"
+                                   ng-show="!editableProfileForm.$visible" ng-hide="!showEditBtn">
+                                    Edit profile <i class="fa fa-pencil"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class=" col-xs-6">
-                    <h3 editable-text="profile.name">{{ profile.name || 'empty' }}</h3>
-                    <span editable-number="profile.age">{{profile.age}} years. </span>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">General Information</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <span class="text-muted">Birthday</span>
+                        </div>
+                        <div class="col-xs-8">
+                            <span editable-date="profile.birthday">{{ profile.birthday | date: "dd/MM/yyyy" }}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <span class="text-muted">Location</span>
+                        </div>
+                        <div class="col-xs-8">
+                            <span editable-text="profile.country">{{ profile.country }}</span>,
+                            <span editable-text="profile.city">{{ profile.city }}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <span class="text-muted">Job</span>
+                        </div>
+                        <div class="col-xs-8">
+                            <span editable-text="profile.job">{{ profile.job || 'empty' }}</span>
+                        </div>
+                    </div>
                 </div>
-            </div><hr>
-
-            <dl >
-                <h4>General information</h4>
-                <dt>Birthday :</dt>
-                <dd editable-date="profile.birthday">{{profile.birthday | date: "dd/MM/yyyy"}}</dd>
-                <dt>Location :</dt>
-                <dd editable-text="profile.country">   {{profile.country}}, {{profile.city}}.</dd>
-                <dd editable-text="profile.city"></dd>
-                <dt>Job :</dt>
-                <dd editable-text="profile.job">  {{profile.job || 'empty'}}.</dd>
-                <dt>About self : </dt>
-                <dd editable-textarea="profile.description">  {{profile.description}}</dd><hr>
-
-                <h4> Conact information</h4>
-                <dt> E-mail : </dt>
-                <dd editable-email="profile.email">{{profile.email || 'empty'}}</dd>
-                <dt>Phone : </dt>
-                <dd editable-tel="profile.phone" e-pattern="\(\d{3}\)\ \d{3}\-\d{4}" e-title="(xxx) xxx-xxxx"> {{profile.phone || 'empty'}}</dd><hr>
-            </dl>
-
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Contact Information</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <span class="text-muted">E-mail</span>
+                        </div>
+                        <div class="col-xs-8">
+                            <span editable-email="profile.email">{{ profile.email || '' }}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <span class="text-muted">Phone</span>
+                        </div>
+                        <div class="col-xs-8">
+                            <span editable-tel="profile.phone" e-pattern="\(\d{3}\)\ \d{3}\-\d{4}" e-title="(xxx) xxx-xxxx">
+                                {{ profile.phone || 'empty' }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
-
     </div>
-
-    <div class="col-xs-12 col-md-9 col-md-offset-3">
-
-
-
-        <h4>Posts of {{profile.name}}</h4><hr>
+    <div class="col-xs-12 col-md-8 col-lg-9">
         <div class="row">
-
-            <form class="col-md-6" ng-submit="submitForm()">
+            <form class="col-xs-12" ng-submit="submitForm()">
                 <div class="form-group">
-                    <label for="postSubject">Post subject:</label>
-                    <input type="text" class="form-control" id="postSubject" placeholder="subject" ng-model="newPost.subject">
+                    <input type="text" class="form-control" id="postSubject" ng-model="newPost.subject"
+                        placeholder="Subject">
                 </div>
                 <div class="form-group">
-                    <label for="postDescription">Post text:</label>
-                    <textarea id="postDescription" type="text" rows="4" class="form-control" placeholder="text" ng-model="newPost.description"></textarea>
+                    <textarea id="postDescription" type="text" rows="4" class="form-control"
+                              placeholder="Text" ng-model="newPost.description"></textarea>
                 </div>
-
-                <button type="submit" class="btn btn-primary" ng-click="createPost(newPost)">Submit</button>
+                <button type="submit" class="btn btn-sm btn-info pull-right" ng-click="createPost()">Create New Post</button>
             </form>
-
         </div>
         <hr>
-
         <sn-post ng-repeat="post in posts track by $index | orderBy: createdAt" sn-post="post"></sn-post>
-        <a href="" class="btn btn-primary pull-right" ng-click="loadPosts($event)" ng-hide="!showMoreBtn">More posts</a>
-
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <a href="" class="btn btn-info" ng-click="loadPosts($event)" ng-hide="!showMoreBtn">More posts</a>
+            </div>
+        </div>
     </div>
-
 </div>

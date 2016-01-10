@@ -1,5 +1,26 @@
-<div>
-    <h3>{{post.subject}}</h3>
-    <p>{{post.description}}</p>
-    <span class="right">{{post.createdAt | date}}</span>
-</div><hr>
+<div class="row sn-post-wrap">
+    <div class="col-xs-12">
+        <h4>{{ post.subject }}</h4>
+        <p>{{ post.description }}</p>
+        <div class="row">
+            <div class="col-xs-6">
+                <em class="small text-muted"><i class="fa fa-calendar"></i> {{ post.createdAt | date }}</em>
+            </div>
+            <div class="col-xs-6 text-right">
+                <a href="" class="text-muted" ng-click="post.showComments = !post.showComments">
+                    <i class="fa fa-comments"></i> {{ post.comments.length }}
+                </a>
+            </div>
+        </div>
+        <div class="row" ng-show="post.comments.length && post.showComments">
+            <div class="col-xs-12 sn-post-comments">
+                <ul class="list-unstyled">
+                    <li class="small" ng-repeat="comment in post.comments">
+                        <i class="fa fa-comment text-info"></i>
+                        <em class="text-muted">{{ comment.description }}</em>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

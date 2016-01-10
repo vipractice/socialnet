@@ -2,7 +2,7 @@
 
 angular.module('social-net.common.components.header')
 
-.directive('snHeader', [function () {
+.directive('snHeader', ['AuthService', function (AuthService) {
 
     return {
         restrict: 'E',
@@ -16,6 +16,10 @@ angular.module('social-net.common.components.header')
 
             scope.$on('user-authorized', function(event, data) {
                 scope.isAuthorized = data.isAuthorized;
+
+                if (scope.isAuthorized) {
+                    scope.user = AuthService.user;
+                }
             });
         }
     };

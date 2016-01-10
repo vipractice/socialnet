@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('social-net.login').
+angular.module('social-net.auth.login').
 
     controller('LoginCtrl', ['$scope', '$state', '$timeout', 'AuthService',
         function ($scope, $state, $timeout, AuthService) {
@@ -27,10 +27,10 @@ angular.module('social-net.login').
                 $timeout(function() {
                     $scope.message.isShown = false;
 
-                    if (AuthService.isAuthorized) {
+                    if (AuthService.user) {
                         $state.go('profile');
                     }
-                }, 3000);
+                }, 1000);
             }
 
         }]);

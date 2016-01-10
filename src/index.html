@@ -16,17 +16,11 @@
         sn-header-home-state="profile">
     <li ui-sref-active="active"><a ui-sref="profile">My Profile</a></li>
     <li ui-sref-active="active"><a ui-sref="friends">Friends</a></li>
-    <li ui-sref-active="active"><a ui-sref="posts ">Posts</a></li>
-    <li ui-sref-active="active"><a ui-sref="home">Home</a></li>
 </sn-header>
-
-<h1>{{Myid}}</h1>
 
 <div ui-view class="container-fluid"></div>
 
-<sn-footer>
-
-</sn-footer>
+<sn-footer></sn-footer>
 
 <% scripts.forEach( function ( file ) { %>
 <script type="text/javascript" src="<%= file %>"></script><% }); %>

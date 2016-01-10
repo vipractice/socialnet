@@ -2,14 +2,24 @@
 
 angular.module('social-net.common.models.post', ['ngResource']).
 
-factory ('PostModel', ['$resource', function ($resource) {
+factory ('PostModel', ['PostResource', function (PostResource) {
 
-    var PostModel = $resource('http://localhost:3000/posts/:id', { id: '@id' });
+    function PostModel(userId) {
+        this.userId = userId;
+        this.subject = '';
+        this.description = '';
+        this.createdAt = new Date();
+    }
 
-    return {
-        getByUserId: function (id) {
-            return PostModel.get({ id: id });
-        }
+    PostModel.prototype.save = function() {
+        return PostResource.save({
+            subject: this.subject,
+            description: this.description,
+            userId: this.userId,
+            createdAt: this.createdAt
+        }).$promise;
     };
+
+    return PostModel;
 
 }]);

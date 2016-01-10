@@ -8,11 +8,9 @@ angular
         'templates-app',
         'xeditable',
         'social-net.common',
-        'social-net.home',
-        'social-net.posts',
         'social-net.friends',
         'social-net.profile',
-        'social-net.login'
+        'social-net.auth'
     ])
 
     .config(['$urlRouterProvider', function($urlRouterProvider) {
@@ -22,13 +20,12 @@ angular
     .run(function($rootScope, $state,  editableOptions, AuthService) {
         editableOptions.theme = 'bs3';
 
-        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-            $rootScope.$broadcast('user-authorized', { isAuthorized: AuthService.isAuthorized });
-
+        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+            AuthService.checkAuth().catch(function() {
+                $state.go('login', { reload: true, location: '/login' });
+            }).finally(function() {
+                $rootScope.$broadcast('user-authorized', { isAuthorized: angular.isDefined(AuthService.user) });
+            });
         });
-
-        if (!AuthService.isAuthorized){
-            $state.go('login',{reload:true, location:'/login'});
-        }
     }
 );
