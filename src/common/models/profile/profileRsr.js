@@ -8,16 +8,20 @@ factory ('ProfileRsr', ['$resource', function ($resource) {
 
     return  $resource(profileUrl, { id: '@id'}, {
 
-            getUser: {
-                method: 'GET',
-                url: profileUrl,
-                isArray: true
+            createPost: {
+                method: 'POST',
+                url: 'http://localhost:3000/posts'
             },
 
             updateUser: {
                 method: 'PUT'
             },
 
+            getUser: {
+                method: 'GET',
+                url: profileUrl,
+                isArray: true
+            },
             getPosts: {
                 method: 'GET',
                 url: profileUrl + '/posts?_sort=createdAt&_order=ASC',

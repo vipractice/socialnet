@@ -23,6 +23,10 @@ factory ('ProfileModel',  function (ProfileRsr) {
 
         updateUser: function(profile) {
             return ProfileRsr.updateUser(profile).$promise;
+        },
+
+        createPost: function (newPost) {
+            return ProfileRsr.createPost(newPost).$promise;
         }
     };
 

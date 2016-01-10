@@ -39,6 +39,14 @@ controller('ProfileCtrl', [
         });
     };
 
+    $scope.createPost = function(post){
+        post.createdAt = new Date();
+        post.userId = AuthService.user.id;
+        ProfileModel.createPost(post).then(function(response){
+
+        });
+    };
+
     $scope.loadPosts = function($event) {
         $event.preventDefault();
         $event.stopPropagation();
@@ -64,5 +72,6 @@ controller('ProfileCtrl', [
 
         });
     }
+
 
 }]);

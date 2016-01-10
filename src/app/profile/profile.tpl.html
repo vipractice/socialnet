@@ -59,18 +59,20 @@
 
         <h4>Posts of {{profile.name}}</h4><hr>
         <div class="row">
-            <form class="col-md-6">
+
+            <form class="col-md-6" ng-submit="submitForm()">
                 <div class="form-group">
                     <label for="postSubject">Post subject:</label>
-                    <input type="text" class="form-control" id="postSubject" placeholder="subject">
+                    <input type="text" class="form-control" id="postSubject" placeholder="subject" ng-model="newPost.subject">
                 </div>
                 <div class="form-group">
                     <label for="postDescription">Post text:</label>
-                    <textarea id="postDescription" type="text" rows="4" class="form-control" placeholder="text"></textarea>
+                    <textarea id="postDescription" type="text" rows="4" class="form-control" placeholder="text" ng-model="newPost.description"></textarea>
                 </div>
 
-                <button type="submit" class="btn btn-primary" ng-click="addPost()">Submit</button>
+                <button type="submit" class="btn btn-primary" ng-click="createPost(newPost)">Submit</button>
             </form>
+
         </div>
         <hr>
 
