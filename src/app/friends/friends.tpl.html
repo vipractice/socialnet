@@ -1,29 +1,39 @@
-<div class="container">
-    <div class="row">
-        <form  class="form" ng-model="search" >
-            <div class="col-md-6 ">
-                <div class="form-group">
-                    <label> Search in friends by name:</label>
-                    <input type="text" class="form-control" ng-model="search.user.name">
-                    <label> Search in friends by e-mail:</label>
-                    <input type="email" class="form-control" ng-model="search.user.email">
-                </div>
+<div>
+    <div class="col-xs-12 col-md-4 col-lg-3">
+        <div class="panel panel-default">
+            <div class="panel-heading text-center">
+               <h2>Search in friends</h2>
             </div>
+            <form  class="form panel-body" ng-model="search" >
+                <div class="col-md-12 ">
+                    <div class="form-group">
+                        <label> Search in friends by name:</label>
+                        <input type="text" class="form-control" ng-model="search.user.name">
+                        <label> Search in friends by e-mail:</label>
+                        <input type="email" class="form-control" ng-model="search.user.email">
+                    </div>
+                </div>
 
-            <div class="col-md-6 ">
-                <div class="form-group">
-                    <label> Search in friends by country:</label>
-                    <input type="text" class="form-control" ng-model="search.user.country">
-                    <label> Search in friends by city:</label>
-                    <input type="text" class="form-control" ng-model="search.user.city">
+                <div class="col-md-12 ">
+                    <div class="form-group">
+                        <label> Search in friends by country:</label>
+                        <input type="text" class="form-control" ng-model="search.user.country">
+                        <label> Search in friends by city:</label>
+                        <input type="text" class="form-control" ng-model="search.user.city">
+                    </div>
+                    <button class="btn-sm btn btn-primary pull-right" ng-click="search = '' "> reset form</button>
                 </div>
-                <button class="btn-sm btn btn-primary pull-right" ng-click="search = '' "> reset form</button>
-            </div>
-        </form>
+            </form>
+        </div>
+
     </div>
 
-    <div class="col-xs-12 col-md-12">
-        <sn-friend ng-repeat="friend in friend | filter:search:strict" sn-friend="friend">
+    <div class="col-xs-12 col-md-8 col-lg-9">
+        <sn-friend ng-repeat="friend in friends | filter:search:strict"
+                   sn-friend="friend"
+                   sn-friend-on-click="removeFriend(friend)"
+                   sn-friend-type="friend"></sn-friend>
     </div>
+    <a href="" class="btn btn-info" ng-click="loadPosts($event)" ng-hide="!showMoreBtn">More posts</a>
 
 </div>

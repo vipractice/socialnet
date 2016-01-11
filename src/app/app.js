@@ -10,6 +10,7 @@ angular
         'social-net.common',
         'social-net.friends',
         'social-net.profile',
+        'social-net.users',
         'social-net.auth'
     ])
 

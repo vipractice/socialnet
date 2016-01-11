@@ -29,6 +29,11 @@ factory ('ProfileResource', ['$resource', function ($resource) {
             url: profileUrl + '/posts?_sort=createdAt&_order=DESC&_embed=comments&_start=:start&_end=:end',
             isArray: true
         },
+        getUsersByPage: {
+            method: 'GET',
+            url: 'http://localhost:3000/users'+'?_start=:start&_limit=:limit',
+            isArray: true
+        },
 
         getAll: {
             method: 'GET',

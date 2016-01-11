@@ -1,14 +1,13 @@
-<div class="">
+<div>
     <div class=" col-md-6 media">
-
         <div class="media-left ">
-            <img src="{{friend.user.avatar}}" class="media-object  img-circle">
+            <img src="{{user.avatar}}" class="media-object  img-circle">
         </div>
-
         <div class="media-body media-middle">
-            <a href="#" ng-click="loadProfile($event,friend.user.id)">{{friend.user.name}}</a><hr>
-            <p>{{friend.user.job}}</p>
-        </div>
+            <a href="#" ui-sref="userProfile({ id: user.id })">{{user.name}}</a>
+            <p>{{user.job}}</p><hr>
+            <a href="" class="btn btn-sm btn-default" ng-click="onClick(friend)">{{ btnText }}</a>
+           </div>
         <hr>
     </div>
 </div>

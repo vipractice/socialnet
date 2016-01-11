@@ -22,6 +22,7 @@ factory ('ProfileModel', ['ProfileResource', 'PostResource', function(ProfileRes
             return ProfileResource.updateUser(profile).$promise;
         }
 
+
     };
 
 }]);
