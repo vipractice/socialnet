@@ -2,23 +2,17 @@
 
 angular.module('social-net.friends').
 
-controller('FriendsCtrl', function ($scope, $state, $stateParams, FriendsModel, ProfileModel) {
+controller('FriendsCtrl', function ($scope, $state, $stateParams, FriendsModel, AuthService) {
 
-    var MyId = 1;
+    AuthService.checkAuth().then(function() {
+        $scope.friends = FriendsModel.getFriends(AuthService.user.id);
+    });
 
-    $scope.friend = FriendsModel.getFriends(MyId);
-
-    $scope.profile = ProfileModel.getById(MyId);
-    $scope.loadProfile = function ($event,id){
-        $event.preventDefault();
-        $event.stopPropagation();
-        loadProfile(id);
+    $scope.removeFriend = function(friend){
+        FriendsModel.removeFriend(friend).then(function(response) {
+            _.remove($scope.friends, function(item) {
+                return item.id === friend.id;
+            });
+        });
     };
-
-    function loadProfile (id){
-        $state.path('profile',{reload:true});
-        $scope.profile = ProfileModel.getById(id);
-
-    }
-
 });
