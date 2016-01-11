@@ -2,22 +2,26 @@
 
 angular.module('social-net.users').
 
-controller('UsersCtrl', function ($scope, $state, $stateParams, ProfileResource, FriendsModel, AuthService) {
+controller('UsersCtrl', function ($scope, $state, $stateParams, ProfileResource, FriendsModel, AuthUser) {
 
     var limits = {
         start: 0,
         limit: 8
     };
 
-    AuthService.checkAuth().then(function() {
-        $scope.users = ProfileResource.getUsersByPage({start:limits.tart,limit:limits.limit});
+    $scope.users = ProfileResource.getUsersByPage({
+        start: limits.start,
+        limit: limits.limit
     });
 
     $scope.showMoreUsers = function ($event){
         $event.preventDefault();
         $event.stopPropagation();
         updateLimit();
-        $scope.users = ProfileResource.getUsersByPage({start:limits.start,limit:limits.limit});
+        $scope.users = ProfileResource.getUsersByPage({
+            start: limits.start,
+            limit: limits.limit
+        });
     };
 
     $scope.searchObj = {};
@@ -25,11 +29,13 @@ controller('UsersCtrl', function ($scope, $state, $stateParams, ProfileResource,
     $scope.addFriend = function (user){
 
         var userToSave = {
-            profileId: AuthService.user.id,
+            profileId: AuthUser.id,
             userId: user.id
         };
 
-        FriendsModel.addFriend(userToSave);
+        FriendsModel.addFriend(userToSave).then(function() {
+            user.hideBtn = true;
+        });
     };
 
     $scope.resetSearch = function (){
@@ -46,10 +52,9 @@ controller('UsersCtrl', function ($scope, $state, $stateParams, ProfileResource,
         });
 
         $scope.users = ProfileResource.getAll(searchTemp);
-
     };
 
     function updateLimit() {
-        limits.start = limits.start +limits.limit;
+        limits.start = limits.start + limits.limit;
     }
 });

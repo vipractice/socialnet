@@ -16,7 +16,7 @@ angular.module('social-net.common.components.friend')
 
                 scope.user = angular.isDefined(scope.friend.user) ? scope.friend.user : scope.friend;
 
-                scope.btnText = (scope.type === 'friend') ? 'Remove friend' : 'Make friend';
+                scope.btnText = (scope.type === 'friend') ? 'Remove from friends' : 'Make friend';
             }
         };
 

@@ -4,10 +4,10 @@ angular.module('social-net.profile').
 
 controller('ProfileCtrl', [
     '$scope', '$state', '$stateParams',
-    'ProfileModel', 'PostModel', 'AuthService',
+    'ProfileModel', 'PostModel', 'AuthUser',
     function (
         $scope, $state, $stateParams,
-        ProfileModel, PostModel, AuthService) {
+        ProfileModel, PostModel, AuthUserResolved) {
 
     var step = 5;
 
@@ -19,14 +19,14 @@ controller('ProfileCtrl', [
     if ($stateParams && $stateParams.id) {
         ProfileModel.getById($stateParams.id).then(function(response) {
             $scope.profile = response;
-            $scope.newPost = new PostModel(AuthService.user.id, $scope.profile.id);
+            $scope.newPost = new PostModel(AuthUserResolved.id, $scope.profile.id);
             $scope.showEditBtn = false;
             loadPosts();
         });
     } else {
-        $scope.profile = AuthService.user;
+        $scope.profile = AuthUserResolved;
         $scope.profile.birthday = new Date($scope.profile.birthday);
-        $scope.newPost = new PostModel(AuthService.user.id, AuthService.user.id);
+        $scope.newPost = new PostModel(AuthUserResolved.id, AuthUserResolved.id);
         $scope.showEditBtn = true;
         loadPosts();
     }
@@ -41,8 +41,10 @@ controller('ProfileCtrl', [
 
     $scope.createPost = function(){
         $scope.newPost.save().then(function(post) {
+            post.user = AuthUserResolved;
+            post.comments = [];
             $scope.posts.unshift(post);
-            $scope.newPost = new PostModel(AuthService.user.id);
+            $scope.newPost = new PostModel(AuthUserResolved.id);
         });
     };
 

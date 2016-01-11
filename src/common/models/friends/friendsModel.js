@@ -35,7 +35,7 @@ factory ('FriendsModel', ['$resource', function ($resource) {
         },
 
         addFriend: function (userToSave) {
-            return FriendsModel.saveFriend (userToSave);
+            return FriendsModel.saveFriend(userToSave).$promise;
         }
     };
 }]);

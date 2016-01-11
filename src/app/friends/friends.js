@@ -8,6 +8,13 @@ config(function config($stateProvider) {
         .state('friends', {
             url: '^/friends',
             controller: 'FriendsCtrl',
-            templateUrl: 'friends/friends.tpl.html'
+            templateUrl: 'friends/friends.tpl.html',
+            resolve: {
+                AuthUser: ['AuthService', function(AuthService) {
+                    return AuthService.checkAuth().then(function() {
+                        return AuthService.user;
+                    });
+                }]
+            }
         });
 });

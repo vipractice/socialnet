@@ -2,11 +2,9 @@
 
 angular.module('social-net.friends').
 
-controller('FriendsCtrl', function ($scope, $state, $stateParams, FriendsModel, AuthService) {
+controller('FriendsCtrl', function ($scope, $state, $stateParams, FriendsModel, AuthUser) {
 
-    AuthService.checkAuth().then(function() {
-        $scope.friends = FriendsModel.getFriends(AuthService.user.id);
-    });
+    $scope.friends = FriendsModel.getFriends(AuthUser.id);
 
     $scope.removeFriend = function(friend){
         FriendsModel.removeFriend(friend).then(function(response) {

@@ -1,31 +1,29 @@
 <div>
     <div class="col-xs-12 col-md-4 col-lg-3">
         <div class="panel panel-default">
-            <div class="panel-heading text-center">
-               <h2>Search in friends</h2>
+            <div class="panel-body">
+                <h2 class="text-center">Search</h2>
+                <div class="form-group">
+                    <label>By name:</label>
+                    <input type="text" class="form-control" ng-model="search.user.name">
+                </div>
+                <div class="form-group">
+                    <label>By e-mail:</label>
+                    <input type="email" class="form-control" ng-model="search.user.email">
+                </div>
+                <div class="form-group">
+                    <label>By country:</label>
+                    <input type="text" class="form-control" ng-model="search.user.country">
+                </div>
+                <div class="form-group">
+                    <label>By city:</label>
+                    <input type="text" class="form-control" ng-model="search.user.city">
+                </div>
+                <div class="form-group text-center">
+                    <button class="btn-sm btn btn-default" ng-click="search = ''">Reset</button>
+                </div>
             </div>
-            <form  class="form panel-body" ng-model="search" >
-                <div class="col-md-12 ">
-                    <div class="form-group">
-                        <label> Search in friends by name:</label>
-                        <input type="text" class="form-control" ng-model="search.user.name">
-                        <label> Search in friends by e-mail:</label>
-                        <input type="email" class="form-control" ng-model="search.user.email">
-                    </div>
-                </div>
-
-                <div class="col-md-12 ">
-                    <div class="form-group">
-                        <label> Search in friends by country:</label>
-                        <input type="text" class="form-control" ng-model="search.user.country">
-                        <label> Search in friends by city:</label>
-                        <input type="text" class="form-control" ng-model="search.user.city">
-                    </div>
-                    <button class="btn-sm btn btn-primary pull-right" ng-click="search = '' "> reset form</button>
-                </div>
-            </form>
         </div>
-
     </div>
 
     <div class="col-xs-12 col-md-8 col-lg-9">

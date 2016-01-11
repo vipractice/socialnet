@@ -1,12 +1,14 @@
 <div>
-    <div class=" col-md-6 media">
-        <div class="media-left ">
-            <img src="{{user.avatar}}" class="media-object  img-circle">
+    <div class="col-md-6 media sn-friend-wrap">
+        <div class="media-left">
+            <img src="{{user.avatar}}" class="media-object img-circle">
         </div>
         <div class="media-body media-middle">
-            <a href="#" ui-sref="userProfile({ id: user.id })">{{user.name}}</a>
-            <p>{{user.job}}</p><hr>
-            <a href="" class="btn btn-sm btn-default" ng-click="onClick(friend)">{{ btnText }}</a>
+            <a href="#" ui-sref="userProfile({ id: user.id })">{{ user.name }}</a>
+            <p>{{ user.job }}</p>
+            <p><em>{{ user.email }}</em></p>
+            <p><small>{{ user.country }}, {{ user.city }}</small></p>
+            <a href="" class="btn btn-sm btn-default" ng-click="onClick(friend)" ng-hide="friend.hideBtn">{{ btnText }}</a>
            </div>
         <hr>
     </div>

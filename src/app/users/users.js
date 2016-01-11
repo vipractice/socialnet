@@ -8,6 +8,13 @@ config(function config($stateProvider) {
         .state('users', {
             url: '^/users',
             controller: 'UsersCtrl',
-            templateUrl: 'users/users.tpl.html'
+            templateUrl: 'users/users.tpl.html',
+            resolve: {
+                AuthUser: ['AuthService', function(AuthService) {
+                    return AuthService.checkAuth().then(function() {
+                        return AuthService.user;
+                    });
+                }]
+            }
         });
 });

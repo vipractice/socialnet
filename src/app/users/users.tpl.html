@@ -1,38 +1,35 @@
 <div class="col-xs-12 col-md-4 col-lg-3">
     <div class="panel panel-default">
-    <div class="panel-heading text-center">
-        <h2>Search in users</h2>
-    </div>
-        <form class="panel-body center-block">
-            <div class="form-group ">
-                <label>
-                    Name
-                    <input type="text" class="form-control" ng-model="searchObj.name">
-                </label><br>
-                <label>
-                    City
-                    <input type="text" class="form-control" ng-model="searchObj.city">
-                </label><br>
-                <label>
-                    Country
-                    <input type="text" class="form-control" ng-model="searchObj.country">
-                </label><br>
+        <h2 class="text-center">Search</h2>
+        <form class="panel-body center-block" ng-submit="search()">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" ng-model="searchObj.name">
+            </div>
+            <div class="form-group">
+                <label>City</label>
+                <input type="text" class="form-control" ng-model="searchObj.city">
+            </div>
+            <div class="form-group">
+                <label>Country</label>
+                <input type="text" class="form-control" ng-model="searchObj.country">
+            </div>
+            <div class="form-group">
                 <label>
                     <input type="radio" ng-model="searchObj.gender" value="f">
-                    Fimale
+                    Female
                 </label>
                 <label>
                     <input type="radio" ng-model="searchObj.gender" value="m">
                     Male
-                </label><br/>
+                </label>
             </div>
-            <div class="pull-right">
-                <button class="btn btn-default " ng-click="resetSearch()">reset</button>
-                <button class="btn  btn-primary " ng-click="search()">search</button>
+            <div class="text-center">
+                <button class="btn btn-default" ng-click="resetSearch()">Reset</button>
+                <button class="btn btn-info" type="submit">Search</button>
             </div>
         </form>
-</div>
-
+    </div>
 </div>
 
 <div class="col-xs-12 col-md-8 col-lg-9">
@@ -41,7 +38,7 @@
                sn-friend-on-click="addFriend(user)"
                sn-friend-type="user"></sn-friend>
     <div class="text-center">
-        <a href="#" class="btn btn-info " ng-click="showMoreUsers($event)" ng-hide="showMoreBtn">More users</a>
+        <a href="#" class="btn btn-info" ng-click="showMoreUsers($event)" ng-hide="showMoreBtn">More users</a>
     </div>
 </div>
 
