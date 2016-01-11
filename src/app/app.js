@@ -21,11 +21,19 @@ angular
         editableOptions.theme = 'bs3';
 
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-            AuthService.checkAuth().catch(function() {
-                $state.go('login', { reload: true, location: '/login' });
-            }).finally(function() {
-                $rootScope.$broadcast('user-authorized', { isAuthorized: angular.isDefined(AuthService.user) });
+            AuthService.checkAuth().then(function() {
+                if (toState.name === 'login') {
+                    $state.go('profile', { reload: true, location: '/profile' });
+                }
+            }).catch(function() {
+                if (toState.name !== 'login') {
+                    $state.go('login', { reload: true, location: '/login' });
+                }
             });
+        });
+
+        $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+            $rootScope.$broadcast('user-authorized', { isAuthorized: angular.isDefined(AuthService.user) });
         });
     }
 );

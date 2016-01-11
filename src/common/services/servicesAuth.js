@@ -49,7 +49,7 @@ angular.module('social-net.common.services').
 
         this.logout = function() {
             this.user = undefined;
-            localStorage.snUserId = null;
+            localStorage.removeItem('snUserId');
         };
 
     }]);
