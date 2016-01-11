@@ -20,14 +20,13 @@ factory ('ProfileResource', ['$resource', function ($resource) {
 
         getPosts: {
             method: 'GET',
-            url: profileUrl + '/posts?_sort=createdAt&_order=ASC',
+            url: profileUrl + '/posts?_sort=createdAt&_order=DESC',
             isArray: true
         },
 
         getPostsByPage: {
             method: 'GET',
-            url: profileUrl + '/posts?_sort=createdAt&_order=ASC&_embed=comments&_start=:start&_end=:end',
-            params:{ start:0,end:5},
+            url: profileUrl + '/posts?_sort=createdAt&_order=DESC&_embed=comments&_start=:start&_end=:end',
             isArray: true
         },
 

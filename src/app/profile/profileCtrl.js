@@ -19,17 +19,16 @@ controller('ProfileCtrl', [
     if ($stateParams && $stateParams.id) {
         ProfileModel.getById($stateParams.id).then(function(response) {
             $scope.profile = response;
+            $scope.newPost = new PostModel(AuthService.user.id, $scope.profile.id);
             $scope.showEditBtn = false;
             loadPosts();
         });
     } else {
-        AuthService.checkAuth().then(function() {
-            $scope.profile = AuthService.user;
-            $scope.profile.birthday = new Date($scope.profile.birthday);
-            $scope.newPost = new PostModel(AuthService.user.id);
-            $scope.showEditBtn = true;
-            loadPosts();
-        });
+        $scope.profile = AuthService.user;
+        $scope.profile.birthday = new Date($scope.profile.birthday);
+        $scope.newPost = new PostModel(AuthService.user.id, AuthService.user.id);
+        $scope.showEditBtn = true;
+        loadPosts();
     }
 
     $scope.posts = [];

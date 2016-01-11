@@ -2,7 +2,7 @@
 
 angular.module('social-net.common.models.profile').
 
-factory ('ProfileModel', ['ProfileResource', function(ProfileResource) {
+factory ('ProfileModel', ['ProfileResource', 'PostResource', function(ProfileResource, PostResource) {
 
     return {
 
@@ -15,7 +15,7 @@ factory ('ProfileModel', ['ProfileResource', function(ProfileResource) {
         },
 
         getPostsByPage: function (id, params) {
-           return ProfileResource.getPostsByPage({ id: id, start: params.start, end: params.end }).$promise;
+           return PostResource.getAll({ id: id, start: params.start, end: params.end }).$promise;
         },
 
         updateUser: function(profile) {

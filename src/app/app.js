@@ -29,11 +29,9 @@ angular
                 if (toState.name !== 'login') {
                     $state.go('login', { reload: true, location: '/login' });
                 }
+            }).finally(function() {
+                $rootScope.$broadcast('user-authorized', { isAuthorized: angular.isDefined(AuthService.user) });
             });
-        });
-
-        $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-            $rootScope.$broadcast('user-authorized', { isAuthorized: angular.isDefined(AuthService.user) });
         });
     }
 );
