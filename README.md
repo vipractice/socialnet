@@ -1,3 +1,5 @@
+Task: Create Social Network application with ability to post information, search users, view profiles of other users, add to friends. Each user can edit his profile.
+
 To Start JSON Server:
 --------------
 - npm install -g json-server
