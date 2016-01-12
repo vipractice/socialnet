@@ -3,24 +3,34 @@
 angular.module('social-net.users').
 
 controller('UsersCtrl', function ($scope, $state, $stateParams, ProfileResource, FriendsModel, AuthUser) {
+    var step = 8;
 
     var limits = {
         start: 0,
-        limit: 8
+        end: step
     };
 
     $scope.users = ProfileResource.getUsersByPage({
         start: limits.start,
-        limit: limits.limit
+        end: limits.end
     });
 
     $scope.showMoreUsers = function ($event){
         $event.preventDefault();
         $event.stopPropagation();
         updateLimit();
-        $scope.users = ProfileResource.getUsersByPage({
-            start: limits.start,
-            limit: limits.limit
+
+        ProfileResource.getUsersByPage({start: limits.start, end: limits.end},function (response){
+
+            if (response.length){
+                $scope.users = _.union($scope.users, response);
+
+                if (response.length < step){
+                    $scope.showMoreUsersBtn = false;
+                } else {
+                    $scope.showMoreUsersBtn = true;
+                }
+            }
         });
     };
 
@@ -39,7 +49,15 @@ controller('UsersCtrl', function ($scope, $state, $stateParams, ProfileResource,
     };
 
     $scope.resetSearch = function (){
-        $scope.users = ProfileResource.getAll();
+        $scope.searchObj = {};
+        limits.start =0;
+        limits.end = step;
+        $scope.users = ProfileResource.getUsersByPage({
+            start: limits.start,
+            end: limits.end
+        });
+        $scope.showMoreUsersBtn = false;
+
     };
 
     $scope.search = function() {
@@ -50,11 +68,14 @@ controller('UsersCtrl', function ($scope, $state, $stateParams, ProfileResource,
                 searchTemp[key] = item;
             }
         });
+        if (!_.isEmpty(searchTemp)){
+            $scope.users = ProfileResource.getAll(searchTemp);
+        }
 
-        $scope.users = ProfileResource.getAll(searchTemp);
     };
 
     function updateLimit() {
-        limits.start = limits.start + limits.limit;
+        limits.start = limits.start + limits.end;
+        limits.end = limits.end + step;
     }
 });

@@ -31,7 +31,7 @@ factory ('ProfileResource', ['$resource', function ($resource) {
         },
         getUsersByPage: {
             method: 'GET',
-            url: 'http://localhost:3000/users'+'?_start=:start&_limit=:limit',
+            url: 'http://localhost:3000/users'+'?_start=:start&_end=:end',
             isArray: true
         },
 
